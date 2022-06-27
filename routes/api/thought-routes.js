@@ -4,12 +4,20 @@ const {
   getThoughtById,
   addThought,
   removeThought,
+  updateThought,
+  addReaction,
+  removeReaction,
 } = require("../../controllers/thought-controller");
 
-// /api/comments/<pizzaId>
 router.route("/").get(getAllThought).post(addThought);
 
-// /api/comments/<pizzaId>/<commentId>
-router.route("/:id").get(getThoughtById).delete(removeThought);
+router
+  .route("/:id")
+  .get(getThoughtById)
+  .delete(removeThought)
+  .put(updateThought)
+  .post(addReaction);
+
+router.route("/:thoughtid/reactions/:reactionid").delete(removeReaction);
 
 module.exports = router;
